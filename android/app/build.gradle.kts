@@ -3,7 +3,7 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-    // id("com.google.gms.google-services") // Commented out - only needed if using Firebase
+    id("com.google.gms.google-services") // Enable Firebase
 }
 
 android {
@@ -25,7 +25,7 @@ android {
         applicationId = "com.example.onboardingclever"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 23  // Required for firebase_messaging
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
@@ -45,8 +45,8 @@ flutter {
 }
 
 dependencies {
-    // Firebase Messaging - commented out unless you're actually using Firebase
-    // implementation("com.google.firebase:firebase-messaging:23.4.0")
+    // Firebase Messaging for push notifications
+    implementation("com.google.firebase:firebase-messaging:23.4.0")
     implementation("androidx.core:core:1.12.0")
     implementation("androidx.fragment:fragment:1.6.2")
     

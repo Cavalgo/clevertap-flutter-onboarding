@@ -46,6 +46,22 @@
         <meta-data
             android:name="CLEVERTAP_REGION"
             android:value="us1"/>
+        
+        <!-- CleverTap FCM Message Listener Service -->
+        <service
+            android:name="com.clevertap.android.sdk.pushnotification.fcm.FcmMessageListenerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        
+        <!-- CleverTap Push Notification Receiver -->
+        <receiver
+            android:name="com.clevertap.android.sdk.pushnotification.CTPushNotificationReceiver"
+            android:exported="false"
+            android:enabled="true">
+        </receiver>
     </application>
     <!-- Required to query activities that can process text, see:
          https://developer.android.com/training/package-visibility and

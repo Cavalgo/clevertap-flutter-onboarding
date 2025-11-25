@@ -51,5 +51,7 @@
 	<string>TEST-ccb-a20</string>
 	<key>CleverTapRegion</key>
 	<string>us1</string>
+	<key>FirebaseAppDelegateProxyEnabled</key>
+	<false/>
 </dict>
 </plist>

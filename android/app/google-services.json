@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "60861017036",
+    "project_id": "onboardingclever",
+    "storage_bucket": "onboardingclever.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60861017036:android:90bf675e61126455f3cb69",
+        "android_client_info": {
+          "package_name": "com.example.onboardingclever"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBIE5LVHKcIMeraRnCNtVN4gZ--_aYfuyE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

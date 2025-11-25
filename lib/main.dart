@@ -1,7 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:clevertap_plugin/clevertap_plugin.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+import 'firebase_options.dart';
 
-void main() {
+// Background message handler
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  print('Handling background message: ${message.messageId}');
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Set up Firebase background message handler
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(const MyApp());
 }
 
@@ -30,6 +47,38 @@ class MyHomePage extends StatelessWidget {
     // Record a test event
     CleverTapPlugin.recordEvent("App Opened", {});
     print('CleverTap: App Opened event recorded');
+
+    // Initialize Firebase Messaging for push notifications
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    // Request permission for iOS
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      badge: true,
+      sound: true,
+    );
+    print('User granted permission: ${settings.authorizationStatus}');
+
+    // Get FCM token and pass it to CleverTap
+    String? token = await messaging.getToken();
+    if (token != null) {
+      print('FCM Token: $token');
+      CleverTapPlugin.setPushToken(token);
+      print('CleverTap: FCM token set');
+    }
+
+    // Handle foreground messages
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+      print('Received foreground message: ${message.notification?.title}');
+      if (message.notification != null) {
+        print('Message notification: ${message.notification!.body}');
+      }
+    });
+
+    // Handle notification taps
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+      print('Notification tapped: ${message.notification?.title}');
+    });
   }
 
   @override
