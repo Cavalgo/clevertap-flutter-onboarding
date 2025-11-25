@@ -43,9 +43,9 @@ class MyHomePage extends StatelessWidget {
 
   // Initialize CleverTap
   void _initializeCleverTap() async {
-    CleverTapPlugin.setDebugLevel(3); // Enable debug logging
+    //CleverTapPlugin.setDebugLevel(3);
 
-    // Record a test event
+    // a test event
     CleverTapPlugin.recordEvent("App Opened", {});
     print('CleverTap: App Opened event recorded');
 
@@ -65,7 +65,7 @@ class MyHomePage extends StatelessWidget {
     if (token != null) {
       print('FCM Token: $token');
       CleverTapPlugin.setPushToken(token);
-      print('CleverTap: FCM token set');
+      print('Clever Tap FCM token set');
     }
 
     // Handle foreground messages
@@ -98,8 +98,6 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
-                print('Button 1 pressed');
-
                 // 1. Track Product Viewed event
                 var productData = {
                   'Product ID': 1,
